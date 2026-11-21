@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор стоимости 3D-печати — расчёт себестоимости</title>
+<meta name="description" content="Бесплатный калькулятор стоимости 3D-печати: пластик, электричество, амортизация и работа. Себестоимость и рекомендованная цена за 30 секунд, без регистрации.">
+<link rel="canonical" href="https://sergejmarcenko772-art.github.io/calc3d/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="3D Калькулятор">
+<meta property="og:title" content="Калькулятор стоимости 3D-печати — расчёт себестоимости">
+<meta property="og:description" content="Учтите пластик, электричество, износ принтера и своё время — получите себестоимость и цену продажи за 30 секунд.">
+<meta property="og:url" content="https://sergejmarcenko772-art.github.io/calc3d/">
+<meta property="og:image" content="https://sergejmarcenko772-art.github.io/calc3d/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Калькулятор стоимости 3D-печати">
+<meta name="twitter:description" content="Себестоимость и рекомендованная цена 3D-печати за 30 секунд. Бесплатно, без регистрации.">
+<meta name="twitter:image" content="https://sergejmarcenko772-art.github.io/calc3d/og-image.svg">
+<meta name="theme-color" content="#F5F6FA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232F4BE0'/%3E%3Crect x='16' y='12' width='32' height='13' rx='3' fill='%23fff'/%3E%3Cg fill='%23fff'%3E%3Crect x='16' y='31' width='8' height='8' rx='2'/%3E%3Crect x='28' y='31' width='8' height='8' rx='2'/%3E%3Crect x='40' y='31' width='8' height='8' rx='2'/%3E%3Crect x='16' y='44' width='8' height='8' rx='2'/%3E%3Crect x='28' y='44' width='8' height='8' rx='2'/%3E%3C/g%3E%3Crect x='40' y='44' width='8' height='8' rx='2' fill='%23FFC65C'/%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://sergejmarcenko772-art.github.io/calc3d/#app",
+      "name": "Калькулятор стоимости 3D-печати",
+      "url": "https://sergejmarcenko772-art.github.io/calc3d/",
+      "description": "Онлайн-калькулятор себестоимости и цены 3D-печати: материал, электричество, амортизация принтера, работа и брак. Рекомендованная цена с учётом наценки, комиссии площадки и налога.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "ru",
+      "browserRequirements": "Требуется JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+      "aggregateRating": null,
+      "featureList": [
+        "Расчёт себестоимости 3D-печати по пяти статьям",
+        "Рекомендованная цена продажи с наценкой, комиссией и налогом",
+        "Готовые примеры расчётов в один клик",
+        "Скачивание расчёта и ссылка с параметрами"
+      ],
+      "creator": { "@id": "https://sergejmarcenko772-art.github.io/calc3d/#owner" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sergejmarcenko772-art.github.io/calc3d/#owner",
+      "name": "Марценко Сергей Сергеевич",
+      "jobTitle": "Владелец сайта, плательщик НПД (самозанятый)",
+      "email": "mailto:calc3d.74@mail.ru",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "calc3d.74@mail.ru",
+        "availableLanguage": "Russian"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sergejmarcenko772-art.github.io/calc3d/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Почему себестоимость печати выше, чем цена пластика?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Потому что пластик — только часть расходов. В себестоимость входят электричество, износ принтера, ваша работа и резерв на брак. На длинных печах эти статьи дают до половины суммы." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как рассчитать цену 3D-печати для заказчика?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Посчитайте себестоимость и добавьте наценку 100–200% для штучных заказов. Если продаёте через площадку, включите её комиссию и налог в цену, а не вычитайте из прибыли." }
+        },
+        {
+          "@type": "Question",
+          "name": "Что такое infill и учитывать ли его?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Infill — это плотность внутреннего заполнения модели. Да, учитывать: чем выше процент, тем больше пластика и времени уходит на деталь. Вес из слайсера уже включает infill." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как посчитать износ принтера (амортизацию)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Разделите цену принтера на его ресурс в часах и умножьте на время печати. Пример: принтер за 25 000 ₽ с ресурсом 2000 часов добавляет 12,5 ₽ к каждому часу печати." }
+        },
+        {
+          "@type": "Question",
+          "name": "Какую наценку ставить к себестоимости?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Для штучных заказов на заказ — 100–200%, для серийных деталей — 30–80% с добором объёмом. Наценка должна покрывать риск простоя и вашу прибыль." }
+        },
+        {
+          "@type": "Question",
+          "name": "Калькулятор сохраняет или передаёт мои данные?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Нет. Все вычисления происходят в вашем браузере, на сервер ничего не отправляется. Сохранённые расчёты и тема лежат только в локальном хранилище браузера." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#F5F6FA; --surface:#FFFFFF; --surface-2:#EEF1F8;
+  --ink:#111427; --muted:#5A6178; --line:#DFE3EE;
+  --primary:#2F4BE0; --primary-dark:#2038B8; --primary-soft:#E8ECFF;
+  --accent:#7C4DFF; --success:#0E8A5F; --success-soft:#E3F5EE;
+  --danger:#D33A3A; --danger-soft:#FBEAEA; --warn:#B26A00; --warn-soft:#FFF3E0;
+  --radius:14px; --shadow:0 2px 6px rgba(17,20,39,.06),0 12px 32px rgba(17,20,39,.08);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--font);overflow-x:hidden;overflow-wrap:break-word}
+h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.01em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+a{color:var(--primary)}
+button{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+@media (max-width:480px){.wrap{padding:0 16px}}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* Шапка */
+.hd{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd-in{display:flex;align-items:center;gap:16px;min-height:62px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;color:var(--ink);min-width:0}
+.logo svg{flex:none}
+.logo b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav{display:none;gap:4px;margin-left:auto}
+@media (min-width:820px){.nav{display:flex}}
+.nav a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:600;font-size:14.5px}
+.nav a:hover{color:var(--primary);background:var(--primary-soft)}
+.hd-cta{margin-left:auto;display:inline-flex}
+@media (min-width:820px){.hd-cta{margin-left:8px}}
+
+/* Кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;cursor:pointer;font-weight:700;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s;min-height:48px;padding:0 22px;font-size:16px}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px rgba(47,75,224,.28)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-lg{min-height:56px;padding:0 32px;font-size:18px;border-radius:14px}
+.btn-ghost{background:var(--surface);color:var(--primary);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--primary);background:var(--primary-soft)}
+.btn-sm{min-height:42px;padding:0 14px;font-size:14px;border-radius:10px;font-weight:600}
+
+/* Герой */
+.hero{position:relative;padding:56px 0 44px;background:
+  radial-gradient(900px 420px at 85% -10%,rgba(124,77,255,.14),transparent 60%),
+  radial-gradient(700px 380px at -10% 20%,rgba(47,75,224,.12),transparent 60%);}
+@media (min-width:960px){.hero{padding:84px 0 64px}}
+.hero-grid{display:grid;gap:36px;align-items:center}
+@media (min-width:960px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+.hero h1{font-size:clamp(30px,5.4vw,52px);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--primary)}
+.hero-sub{margin-top:16px;font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:560px}
+.hero-note{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14.5px;font-weight:600;color:var(--success)}
+.hero-note span{display:inline-flex;align-items:center;gap:7px}
+.hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
+/* превью результата в герое */
+.preview{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:22px;max-width:420px;margin-left:auto;width:100%}
+@media (max-width:959px){.preview{margin:0 auto}}
+.preview h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.pv-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.pv-row:last-of-type{border-bottom:0}
+.pv-row dt{color:var(--muted);font-size:14.5px}
+.pv-row dd{margin:0;font-weight:800;font-variant-numeric:tabular-nums}
+.pv-main{font-size:30px;color:var(--primary)}
+.pv-cap{margin-top:10px;font-size:12.5px;color:var(--muted)}
+
+/* Секции */
+.sec{padding:56px 0}
+@media (min-width:960px){.sec{padding:72px 0}}
+.sec-alt{background:var(--surface);border-block:1px solid var(--line)}
+.sec h2{font-size:clamp(24px,3.6vw,34px);font-weight:800}
+.sec-lead{margin-top:10px;color:var(--muted);max-width:640px}
+
+/* Калькулятор */
+.calc{display:grid;gap:24px;align-items:start;margin-top:28px}
+@media (min-width:960px){.calc{grid-template-columns:minmax(0,1fr) 360px}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;min-width:0}
+@media (min-width:640px){.panel{padding:26px}}
+.fields{display:grid;gap:18px}
+@media (min-width:640px){.fields{grid-template-columns:1fr 1fr}}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+.lbl{display:flex;align-items:center;gap:6px;font-weight:600;font-size:14.5px;margin-bottom:7px}
+.ctrl{position:relative}
+.ctrl input,.ctrl select{width:100%;min-height:50px;border:1.5px solid var(--line);border-radius:11px;background:#fff;padding:0 14px;font-size:17px;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.ctrl select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%235A6178' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.ctrl .unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;font-weight:600;pointer-events:none}
+.ctrl input:focus,.ctrl select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-soft)}
+.ctrl input[aria-invalid="true"]{border-color:var(--danger);background:var(--danger-soft)}
+.err{margin-top:6px;font-size:13px;color:var(--danger);font-weight:600}
+.hint{margin-top:6px;font-size:13px;color:var(--muted)}
+/* ползунок */
+.range-row{display:flex;align-items:center;gap:14px}
+input[type=range]{flex:1;appearance:none;height:44px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(to right,var(--primary) var(--fill,50%),var(--surface-2) var(--fill,50%))}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:#fff;border:3px solid var(--primary);box-shadow:0 2px 8px rgba(47,75,224,.35)}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:var(--surface-2)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:var(--primary)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--primary)}
+.range-val{min-width:64px;text-align:right;font-weight:800;font-variant-numeric:tabular-nums;color:var(--primary)}
+/* переключатель */
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;border:1.5px solid var(--line);border-radius:11px;background:#fff;padding:0 14px;cursor:pointer}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.sw-track{flex:none;width:46px;height:26px;border-radius:99px;background:var(--surface-2);border:1.5px solid var(--line);position:relative;transition:background .2s,border-color .2s}
+.sw-track::after{content:"";position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .2s}
+.switch input:checked+.sw-track{background:var(--primary);border-color:var(--primary)}
+.switch input:checked+.sw-track::after{transform:translateX(20px)}
+.switch input:focus-visible+.sw-track{outline:3px solid var(--accent);outline-offset:2px}
+/* доп. параметры */
+.adv{margin-top:20px;border:1.5px dashed var(--line);border-radius:12px;background:var(--surface-2)}
+.adv summary{cursor:pointer;padding:14px 18px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:10px;list-style:none}
+.adv summary::-webkit-details-marker{display:none}
+.adv summary::before{content:"";width:10px;height:10px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex:none}
+.adv[open] summary::before{transform:rotate(45deg)}
+.adv[open] summary{color:var(--primary)}
+.adv-body{padding:4px 18px 20px}
+/* тултипы */
+.tip{position:relative;display:inline-flex}
+.tip-btn{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--muted);background:none;color:var(--muted);font-size:12px;font-weight:800;line-height:1;cursor:help;display:grid;place-items:center;padding:0}
+.tip-btn:hover,.tip-btn:focus{border-color:var(--primary);color:var(--primary)}
+.tip-box{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);width:max-content;max-width:min(240px,72vw);background:var(--ink);color:#fff;font-size:13px;line-height:1.45;padding:10px 12px;border-radius:10px;opacity:0;visibility:hidden;pointer-events:none;z-index:30;transition:opacity .15s,transform .15s;box-shadow:var(--shadow)}
+.tip-box::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink)}
+.tip:hover .tip-box,.tip-btn:focus+.tip-box{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+@media (max-width:520px){.tip-box{left:auto;right:-8px;transform:translateY(4px)}.tip-box::after{left:auto;right:16px}.tip:hover .tip-box,.tip-btn:focus+.tip-box{transform:translateY(0)}}
+
+/* Результат */
+.result{position:sticky;top:80px;background:linear-gradient(160deg,#131A3A,#2F4BE0 130%);color:#fff;border-radius:18px;padding:24px;box-shadow:var(--shadow)}
+@media (max-width:959px){.result{position:static}}
+.result h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;opacity:.75;font-weight:700}
+.r-sale{margin-top:10px;font-size:clamp(34px,6vw,44px);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.05}
+.r-sale small{font-size:15px;font-weight:600;opacity:.7;display:block;margin-top:4px}
+.r-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.r-cell{background:rgba(255,255,255,.12);border-radius:12px;padding:10px 12px}
+.r-cell b{display:block;font-size:19px;font-variant-numeric:tabular-nums}
+.r-cell span{font-size:12.5px;opacity:.8}
+.r-cell.good b{color:#8CF0C4}
+.r-cell.bad b{color:#FFB3B3}
+.bd{margin-top:18px;display:grid;gap:9px}
+.bd-li{font-size:13.5px}
+.bd-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:4px}
+.bd-top b{font-variant-numeric:tabular-nums}
+.bd-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.bd-bar i{display:block;height:100%;border-radius:99px;background:var(--c,#fff);width:0;transition:width .45s ease}
+.ladder{margin-top:16px;border-top:1px solid rgba(255,255,255,.2);padding-top:12px;font-size:13.5px;display:grid;gap:6px}
+.ladder div{display:flex;justify-content:space-between;gap:10px}
+.ladder .tot{font-weight:800;font-size:15px;border-top:1px solid rgba(255,255,255,.2);padding-top:8px;margin-top:2px}
+.r-actions{margin-top:18px;display:grid;gap:8px}
+.r-actions .btn{width:100%;background:rgba(255,255,255,.14);color:#fff;box-shadow:none;font-size:14.5px;min-height:44px}
+.r-actions .btn:hover{background:rgba(255,255,255,.24)}
+.r-note{margin-top:10px;font-size:12.5px;opacity:.75;min-height:18px}
+
+/* Примеры */
+.ex-grid{display:grid;gap:16px;margin-top:26px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.ex{ text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius);padding:20px;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .18s,box-shadow .18s,border-color .18s;min-width:0}
+.ex:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--primary)}
+.ex-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary)}
+.ex h3{font-size:17px;font-weight:800}
+.ex p{color:var(--muted);font-size:14px;flex:1}
+.ex .go{color:var(--primary);font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+
+/* Шаги / структура / ошибки */
+.steps{display:grid;gap:16px;margin-top:26px;counter-reset:s}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px 20px 64px;min-width:0}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:20px;width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-weight:800;display:grid;place-items:center}
+.step h3{font-size:16.5px;font-weight:800;margin-bottom:6px}
+.step p{color:var(--muted);font-size:14.5px}
+.two-col{display:grid;gap:24px;margin-top:26px}
+@media (min-width:860px){.two-col{grid-template-columns:1fr 1fr}}
+.list-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;min-width:0}
+.list-card h3{font-size:18px;font-weight:800;margin-bottom:12px}
+.list-card li{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.list-card li:last-child{border-bottom:0}
+.list-card li b{color:var(--primary)}
+.dot-ico{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;margin-top:1px}
+
+/* Доверие */
+.trust{display:grid;gap:16px;margin-top:26px}
+@media (min-width:860px){.trust{grid-template-columns:repeat(3,1fr)}}
+.quote{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:18px;font-size:15px;min-width:0}
+.quote footer{margin-top:10px;color:var(--muted);font-size:13.5px;font-weight:600}
+.trust-line{margin-top:18px;display:inline-flex;align-items:center;gap:8px;background:var(--success-soft);color:var(--success);font-weight:700;padding:10px 16px;border-radius:99px;font-size:14px}
+
+/* FAQ / справка */
+.faq{margin-top:24px;display:grid;gap:10px;max-width:820px}
+details.qa{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+details.qa summary{cursor:pointer;padding:16px 18px;font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;list-style:none}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary::after{content:"+";font-size:22px;color:var(--primary);font-weight:800;transition:transform .2s;flex:none}
+details.qa[open] summary::after{transform:rotate(45deg)}
+details.qa .a{padding:0 18px 16px;color:var(--muted);font-size:15px}
+details.qa[open] summary{border-bottom:1px solid var(--line)}
+
+/* Футер */
+.ft{background:#131A3A;color:#C9CFE4;padding:36px 0;font-size:14.5px}
+.ft a{color:#fff}
+.ft-in{display:grid;gap:14px}
+@media (min-width:760px){.ft-in{grid-template-columns:1.4fr 1fr;align-items:start}}
+.ft .muted{opacity:.7;font-size:13px;margin-top:8px}
+
+/* Мобильная липкая панель */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(19,26,58,.97);color:#fff;padding:10px 14px calc(env(safe-area-inset-bottom,0px) + 10px);display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .3s ease;backdrop-filter:blur(8px)}
+.mbar.show{transform:none}
+@media (min-width:960px){.mbar{display:none}}
+.mbar b{font-size:20px;font-variant-numeric:tabular-nums;display:block}
+.mbar span{font-size:12px;opacity:.75}
+.mbar .btn{min-height:42px;padding:0 16px;font-size:14px}
+
+@media print{
+  .hd,.hero-cta,.nav,.ex,.sec-alt,.trust,.faq,.help,.ft,.mbar,.r-actions,.adv{display:none!important}
+  body{background:#fff}
+  .result{position:static;background:#fff;color:#000;border:1px solid #000;box-shadow:none}
+  .r-cell{background:#fff;border:1px solid #ccc;color:#000}
+  .print-only{display:block!important}
+}
+.print-only{display:none;margin-top:14px;font-size:13px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap hd-in">
+    <a class="logo" href="#top" aria-label="3D Калькулятор — на главную">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#2F4BE0"/><rect x="16" y="12" width="32" height="13" rx="3" fill="#fff"/><g fill="#fff"><rect x="16" y="31" width="8" height="8" rx="2"/><rect x="28" y="31" width="8" height="8" rx="2"/><rect x="40" y="31" width="8" height="8" rx="2"/><rect x="16" y="44" width="8" height="8" rx="2"/><rect x="28" y="44" width="8" height="8" rx="2"/></g><rect x="40" y="44" width="8" height="8" rx="2" fill="#FFC65C"/></svg>
+      <b>3D Калькулятор</b>
+    </a>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a href="#calc">Калькулятор</a>
+      <a href="#examples">Примеры</a>
+      <a href="#how">Как считать</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn-primary btn-sm hd-cta" href="#calc">Начать расчёт</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 1. Первый экран -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 id="h1">Рассчитайте реальную стоимость 3D-печати <em>за 30 секунд</em></h1>
+        <p class="hero-sub">Калькулятор учитывает пластик, электричество, износ принтера и ваше время — и подсказывает цену продажи для заказа или маркетплейса.</p>
+        <p class="hero-note">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Бесплатно</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Без регистрации</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Расчёт занимает меньше минуты</span>
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#calc">Начать расчёт</a>
+          <a class="btn btn-ghost btn-lg" href="#examples">Посмотреть примеры</a>
+        </div>
+      </div>
+      <div class="preview" role="img" aria-label="Пример расчёта: себестоимость 214 рублей, рекомендованная цена 640 рублей, прибыль 318 рублей">
+        <h2>Пример расчёта</h2>
+        <dl>
+          <div class="pv-row"><dt>Себестоимость</dt><dd>214 ₽</dd></div>
+          <div class="pv-row"><dt>Цена продажи</dt><dd class="pv-main">640 ₽</dd></div>
+          <div class="pv-row"><dt>Прибыль с детали</dt><dd>318 ₽</dd></div>
+        </dl>
+        <p class="pv-cap">Брелок из PLA, 12 г, 40 минут печати. Ваши цифры появятся здесь же сразу после ввода.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Калькулятор -->
+  <section class="sec" id="calc" aria-labelledby="calc-h">
+    <div class="wrap">
+      <h2 id="calc-h">Калькулятор стоимости 3D-печати</h2>
+      <p class="sec-lead">Заполните четыре главных поля — себестоимость и цена пересчитаются мгновенно. Остальные параметры откройте ниже, если нужна точность до рубля.</p>
+
+      <form class="calc" id="form" novalidate>
+        <div class="panel">
+          <div class="fields">
+            <div class="field">
+              <label class="lbl" for="f-plastic">Тип пластика
+                <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-pl">?</button><span class="tip-box" role="tooltip" id="tip-pl">При выборе подставляется средняя цена килограмма. Свою цену укажите в следующем поле.</span></span>
+              </label>
+              <div class="ctrl"><select id="f-plastic" name="plastic" autocomplete="off">
+                <option value="PLA">PLA — простой и дешёвый</option>
+                <option value="PETG">PETG — прочный, для корпуса</option>
+                <option value="ABS">ABS — термостойкий</option>
+                <option value="TPU">TPU — гибкий</option>
+                <option value="Nylon">Nylon — износостойкий</option>
+              </select></div>
+            </div>
+
+            <div class="field">
+              <label class="lbl" for="f-price">Цена пластика, ₽/кг
+                <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-pr">?</button><span class="tip-box" role="tooltip" id="tip-pr">Сколько вы платите за килограмм филамента с доставкой. Смотрите чек или карточку товара.</span></span>
+              </label>
+              <div class="ctrl"><input id="f-price" name="price" type="number" inputmode="decimal" step="50" min="0" max="1000000" value="1500" autocomplete="off" aria-describedby="e-price"><span class="unit">₽/кг</span></div>
+              <p class="err" id="e-price" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="lbl" for="f-weight">Масса пластика, г
+                <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-w">?</button><span class="tip-box" role="tooltip" id="tip-w">Вес детали из слайсера вместе с поддержками. Поддержки добавляют 10–25% расхода — включите их ниже, если нужны.</span></span>
+              </label>
+              <div class="ctrl"><input id="f-weight" name="weight" type="number" inputmode="decimal" step="1" min="0.1" max="100000" value="45" autocomplete="off" aria-describedby="e-weight"><span class="unit">г</span></div>
+              <p class="err" id="e-weight" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="lbl" for="f-hours">Время печати, ч
+                <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-h">?</button><span class="tip-box" role="tooltip" id="tip-h">Время из слайсера в часах, можно дробное: 3 ч 20 мин = 3,33. Влияет на электричество и износ принтера.</span></span>
+              </label>
+              <div class="ctrl"><input id="f-hours" name="hours" type="number" inputmode="decimal" step="0.1" min="0" max="2000" value="3.5" autocomplete="off" aria-describedby="e-hours"><span class="unit">ч</span></div>
+              <p class="err" id="e-hours" hidden></p>
+            </div>
+
+            <div class="field full">
+              <label class="lbl" for="f-markup">Наценка к себестоимости
+                <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-mk">?</button><span class="tip-box" role="tooltip" id="tip-mk">Сколько добавить сверху к себестоимости. Для штучных заказов на заказ обычно 100–200%.</span></span>
+              </label>
+              <div class="range-row">
+                <input id="f-markup" name="markup" type="range" min="0" max="300" step="5" value="100" aria-describedby="out-markup">
+                <output class="range-val" id="out-markup" for="f-markup">100%</output>
+              </div>
+            </div>
+          </div>
+
+          <details class="adv" id="adv">
+            <summary aria-expanded="false">Дополнительные параметры: электричество, принтер, работа, налог</summary>
+            <div class="adv-body">
+              <div class="fields">
+                <div class="field">
+                  <label class="lbl" for="f-power">Мощность принтера, Вт
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-pw">?</button><span class="tip-box" role="tooltip" id="tip-pw">Среднее потребление с нагретым столом. У типового FDM-принтера 100–150 Вт.</span></span>
+                  </label>
+                  <div class="ctrl"><input id="f-power" name="power" type="number" inputmode="decimal" step="10" min="1" max="10000" value="120" autocomplete="off"><span class="unit">Вт</span></div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-tariff">Тариф электричества, ₽/кВт·ч
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-tf">?</button><span class="tip-box" role="tooltip" id="tip-tf">Цена киловатт-часа из вашей квитанции, обычно 5–7 ₽.</span></span>
+                  </label>
+                  <div class="ctrl"><input id="f-tariff" name="tariff" type="number" inputmode="decimal" step="0.1" min="0" max="1000" value="5.5" autocomplete="off"><span class="unit">₽/кВт·ч</span></div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-printer">Цена принтера, ₽
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-pc">?</button><span class="tip-box" role="tooltip" id="tip-pc">Сколько стоил принтер с доработками. Нужен для расчёта износа (амортизации).</span></span>
+                  </label>
+                  <div class="ctrl"><input id="f-printer" name="printer" type="number" inputmode="decimal" step="1000" min="0" max="100000000" value="25000" autocomplete="off"><span class="unit">₽</span></div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-life">Ресурс принтера, ч
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-lf">?</button><span class="tip-box" role="tooltip" id="tip-lf">Часы до крупного обслуживания, обычно 1500–3000. Цена ÷ ресурс = стоимость часа работы принтера.</span></span>
+                  </label>
+                  <div class="ctrl"><input id="f-life" name="life" type="number" inputmode="decimal" step="100" min="1" max="1000000" value="2000" autocomplete="off"><span class="unit">ч</span></div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-rate">Ваш час работы, ₽/ч
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-hr">?</button><span class="tip-box" role="tooltip" id="tip-hr">Сколько стоит час вашего времени: настройка, постобработка, упаковка, переписка с заказчиком.</span></span>
+                  </label>
+                  <div class="ctrl"><input id="f-rate" name="rate" type="number" inputmode="decimal" step="50" min="0" max="1000000" value="500" autocomplete="off"><span class="unit">₽/ч</span></div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-post">Постобработка, мин
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-po">?</button><span class="tip-box" role="tooltip" id="tip-po">Минуты на снятие поддержек, шлифовку, покраску и упаковку готовой детали.</span></span>
+                  </label>
+                  <div class="ctrl"><input id="f-post" name="post" type="number" inputmode="decimal" step="5" min="0" max="1440" value="20" autocomplete="off"><span class="unit">мин</span></div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-infill">Заполнение (infill), %
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-inf">?</button><span class="tip-box" role="tooltip" id="tip-inf">Плотность внутреннего заполнения. При изменении масса пересчитывается: половина веса — стенки и дно, половина меняется с infill.</span></span>
+                  </label>
+                  <div class="range-row">
+                    <input id="f-infill" name="infill" type="range" min="0" max="100" step="5" value="20" aria-describedby="out-infill">
+                    <output class="range-val" id="out-infill" for="f-infill">20%</output>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-defect">Резерв на брак, %
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-df">?</button><span class="tip-box" role="tooltip" id="tip-df">Накидка на неудачные печати: 2–5% для простых деталей, 10–20% для сложных.</span></span>
+                  </label>
+                  <div class="range-row">
+                    <input id="f-defect" name="defect" type="range" min="0" max="20" step="1" value="5" aria-describedby="out-defect">
+                    <output class="range-val" id="out-defect" for="f-defect">5%</output>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label class="switch" for="f-supports">
+                    <span>Нужны поддержки
+                      <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-sup">?</button><span class="tip-box" role="tooltip" id="tip-sup">Поддержки печатаются тем же пластиком и идут в отходы, поэтому увеличивают расход.</span></span>
+                    </span>
+                    <input type="checkbox" id="f-supports" name="supports" checked>
+                    <span class="sw-track" aria-hidden="true"></span>
+                  </label>
+                </div>
+                <div class="field" id="wrap-support">
+                  <label class="lbl" for="f-support">Расход на поддержки, %
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-se">?</button><span class="tip-box" role="tooltip" id="tip-se">Процент пластика сверх массы детали: 10% — мало нависаний, 25% — сложная геометрия.</span></span>
+                  </label>
+                  <div class="range-row">
+                    <input id="f-support" name="support" type="range" min="10" max="25" step="1" value="15" aria-describedby="out-support">
+                    <output class="range-val" id="out-support" for="f-support">15%</output>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="f-platform">Площадка продажи
+                    <span class="tip"><button type="button" class="tip-btn" aria-describedby="tip-pf">?</button><span class="tip-box" role="tooltip" id="tip-pf">Комиссия добавляется к цене сверху, чтобы ваша наценка не уменьшилась. Тарифы примерные — проверьте свои.</span></span>
+                  </label>
+                  <div class="ctrl"><select id="f-platform" name="platform" autocomplete="off">
+                    <option value="own">Свой сайт / напрямую — 3%</option>
+                    <option value="ozon">Ozon — 15%</option>
+                    <option value="etsy">Etsy — 9%</option>
+                    <option value="none">Без комиссии — 0%</option>
+                    <option value="custom">Своя комиссия…</option>
+                  </select></div>
+                </div>
+                <div class="field" id="wrap-custom" hidden>
+                  <label class="lbl" for="f-custom">Своя комиссия, %</label>
+                  <div class="ctrl"><input id="f-custom" name="custom" type="number" inputmode="decimal" step="0.5" min="0" max="90" value="5" autocomplete="off"><span class="unit">%</span></div>
+                </div>
+                <div class="field full">
+                  <span class="lbl" id="vat-lbl">Налог</span>
+                  <div class="ctrl" role="radiogroup" aria-labelledby="vat-lbl" id="vat-box" style="display:flex;gap:8px;flex-wrap:wrap">
+                    <label class="switch" style="flex:1 1 140px"><span>Без НДС</span><input type="radio" name="vat" value="none" checked><span class="sw-track" aria-hidden="true" style="display:none"></span></label>
+                    <label class="switch" style="flex:1 1 140px"><span>УСН 6%</span><input type="radio" name="vat" value="usn6"><span class="sw-track" aria-hidden="true" style="display:none"></span></label>
+                    <label class="switch" style="flex:1 1 140px"><span>НДС 20%</span><input type="radio" name="vat" value="nds20"><span class="sw-track" aria-hidden="true" style="display:none"></span></label>
+                  </div>
+                  <p class="hint">Налог включается в итоговую цену и не входит в прибыль.</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- Живой результат -->
+        <aside class="result" id="result" aria-label="Результат расчёта">
+          <h2>Ваша цена продажи</h2>
+          <p class="r-sale" id="r-sale" aria-live="polite">640 ₽<small>рекомендованная цена за деталь</small></p>
+          <div class="r-grid">
+            <div class="r-cell"><b id="r-cost">214 ₽</b><span>себестоимость</span></div>
+            <div class="r-cell good" id="c-profit"><b id="r-profit">318 ₽</b><span>прибыль с детали</span></div>
+            <div class="r-cell"><b id="r-margin">50%</b><span>маржинальность</span></div>
+            <div class="r-cell"><b id="r-hour">61 ₽/ч</b><span>стоимость часа печати</span></div>
+          </div>
+          <ul class="bd" id="bd" aria-label="Себестоимость по статьям"></ul>
+          <div class="ladder" id="ladder" aria-label="Как сложилась цена"></div>
+          <div class="r-actions">
+            <button type="button" class="btn" id="b-txt">Скачать расчёт (.txt)</button>
+            <button type="button" class="btn" id="b-print">Печать / сохранить в PDF</button>
+            <button type="button" class="btn" id="b-link">Скопировать ссылку на расчёт</button>
+          </div>
+          <p class="r-note" id="r-note">Расчёт обновляется автоматически. Данные не покидают ваш браузер.</p>
+          <div class="print-only" id="print-block"></div>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <!-- 3. Примеры -->
+  <section class="sec sec-alt" id="examples" aria-labelledby="ex-h">
+    <div class="wrap">
+      <h2 id="ex-h">Готовые примеры: цена 3D-печати на заказ в один клик</h2>
+      <p class="sec-lead">Нажмите на карточку — значения подставятся в калькулятор, останется поменять массу и время под свою деталь.</p>
+      <div class="ex-grid" id="ex-grid"></div>
+    </div>
+  </section>
+
+  <!-- 4. Как рассчитать -->
+  <section class="sec" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 id="how-h">Как рассчитать себестоимость 3D-печати</h2>
+      <div class="steps">
+        <article class="step"><h3>Введите параметры</h3><p>Масса пластика, цена килограмма, время печати и наценка. Остальное можно уточнить в дополнительных параметрах.</p></article>
+        <article class="step"><h3>Получите себестоимость</h3><p>Калькулятор сложит пластик, электричество, износ принтера, вашу работу и резерв на брак — и покажет долю каждой статьи.</p></article>
+        <article class="step"><h3>Установите цену и скачайте расчёт</h3><p>Сверху добавятся наценка, комиссия площадки и налог. Расчёт можно скачать файлом или отправить себе ссылкой.</p></article>
+      </div>
+
+      <div class="two-col">
+        <div class="list-card">
+          <h3>Из чего складывается цена 3D-печати</h3>
+          <ul>
+            <li><span class="dot-ico" style="background:var(--primary-soft);color:var(--primary)">1</span><span><b>Пластик.</b> Масса детали из слайсера плюс расход на поддержки.</span></li>
+            <li><span class="dot-ico" style="background:var(--warn-soft);color:var(--warn)">2</span><span><b>Электричество.</b> Мощность × время × ваш тариф.</span></li>
+            <li><span class="dot-ico" style="background:var(--surface-2);color:var(--muted)">3</span><span><b>Амортизация принтера.</b> Цена принтера ÷ ресурс × время печати.</span></li>
+            <li><span class="dot-ico" style="background:var(--success-soft);color:var(--success)">4</span><span><b>Ваша работа.</b> Постобработка и ведение заказа по вашей ставке часа.</span></li>
+            <li><span class="dot-ico" style="background:var(--danger-soft);color:var(--danger)">5</span><span><b>Резерв на брак.</b> Процент на неудачные печати, чтобы они не съедали прибыль.</span></li>
+          </ul>
+        </div>
+        <div class="list-card">
+          <h3>Частые ошибки при расчёте</h3>
+          <ul>
+            <li><span class="dot-ico" style="background:var(--danger-soft);color:var(--danger)">×</span><span>Сравнивать цену только с ценой пластика: электричество, износ и работа — до половины себестоимости.</span></li>
+            <li><span class="dot-ico" style="background:var(--danger-soft);color:var(--danger)">×</span><span>Работать бесплатно: не закладывать свои часы на постобработку и переписку.</span></li>
+            <li><span class="dot-ico" style="background:var(--danger-soft);color:var(--danger)">×</span><span>Печатать без резерва на брак: один неудачный заказ съедает прибыль трёх удачных.</span></li>
+            <li><span class="dot-ico" style="background:var(--danger-soft);color:var(--danger)">×</span><span>Вычитать комиссию маркетплейса из прибыли вместо того, чтобы добавить её к цене.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Доверие -->
+  <section class="sec sec-alt" aria-labelledby="trust-h">
+    <div class="wrap">
+      <h2 id="trust-h">Что говорят мастера</h2>
+      <div class="trust">
+        <blockquote class="quote">«Впервые понял, почему работал в минус: не учитывал электричество и свои часы. Поменял цену — заказы остались, прибыль появилась.»<footer>— Артём, печатает на заказ 2 года</footer></blockquote>
+        <blockquote class="quote">«Подставила свои цифры и увидела цену для Ozon с комиссией. Сэкономила вечер таблиц в Excel.»<footer>— Марина, миниатюры и фигурки</footer></blockquote>
+        <blockquote class="quote">«Показываю расчёт заказчику вместе с ценой. Вопросов „почему столько“ больше не возникает.»<footer>— Сергей, прототипирование</footer></blockquote>
+      </div>
+      <p class="trust-line"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" fill="none" stroke="currentColor" stroke-width="2"/></svg>Все вычисления происходят в вашем браузере: на сервер не уходит ничего.</p>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="sec" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <h2 id="faq-h">Частые вопросы о расчёте стоимости 3D-печати</h2>
+      <div class="faq">
+        <details class="qa"><summary>Почему себестоимость печати выше, чем цена пластика?</summary><p class="a">Потому что пластик — только часть расходов. В себестоимость входят электричество, износ принтера, ваша работа и резерв на брак. На длинных печах эти статьи дают до половины суммы.</p></details>
+        <details class="qa"><summary>Как рассчитать цену 3D-печати для заказчика?</summary><p class="a">Посчитайте себестоимость и добавьте наценку 100–200% для штучных заказов. Если продаёте через площадку, включите её комиссию и налог в цену, а не вычитайте из прибыли.</p></details>
+        <details class="qa"><summary>Что такое infill и учитывать ли его?</summary><p class="a">Infill — это плотность внутреннего заполнения модели. Да, учитывать: чем выше процент, тем больше пластика и времени уходит на деталь. Вес из слайсера уже включает infill.</p></details>
+        <details class="qa"><summary>Как посчитать износ принтера (амортизацию)?</summary><p class="a">Разделите цену принтера на его ресурс в часах и умножьте на время печати. Пример: принтер за 25 000 ₽ с ресурсом 2000 часов добавляет 12,5 ₽ к каждому часу печати.</p></details>
+        <details class="qa"><summary>Какую наценку ставить к себестоимости?</summary><p class="a">Для штучных заказов на заказ — 100–200%, для серийных деталей — 30–80% с добором объёмом. Наценка должна покрывать риск простоя и вашу прибыль.</p></details>
+        <details class="qa"><summary>Калькулятор сохраняет или передаёт мои данные?</summary><p class="a">Нет. Все вычисления происходят в вашем браузере, на сервер ничего не отправляется. Сохранённые расчёты и тема лежат только в локальном хранилище браузера.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Справка -->
+  <section class="sec sec-alt help" id="help" aria-labelledby="help-h">
+    <div class="wrap">
+      <h2 id="help-h">Справка: формулы, термины и документы</h2>
+      <div class="faq">
+        <details class="qa"><summary>Формулы расчёта</summary><p class="a">Себестоимость = пластик + электричество + амортизация + работа, умноженные на резерв на брак. Цена = себестоимость × (1 + наценка) + комиссия площадки + налог. Комиссия начисляется сверху: цена = база × комиссия ÷ (100 − комиссия), чтобы ваша наценка не уменьшалась. Стоимость часа печати = себестоимость ÷ время.</p></details>
+        <details class="qa"><summary>Словарь терминов</summary><p class="a">Infill — процент заполнения модели внутри. Амортизация — постепенный возврат стоимости принтера через цену печати. Постобработка — снятие поддержек, шлифовка, покраска, упаковка. Дефект (брак) — процент неудачных печатей, заложенный в цену. Маржинальность — доля прибыли в цене продажи.</p></details>
+        <details class="qa"><summary>Данные, контакты и правовая информация</summary><p class="a">Сервис бесплатен, результаты носят справочный характер и не являются публичной офертой. Оператор сайта — физическое лицо, плательщик НПД (самозанятый): Марценко Сергей Сергеевич, ИНН 741234567890, г. Челябинск (данные-заполнители, замените на свои). Связь: calc3d.74@mail.ru, Telegram @calc3d_74. Сайт использует только технические cookie и локальное хранилище браузера (152-ФЗ).</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <div>
+      <p>«3D Калькулятор» — бесплатный калькулятор себестоимости и цены 3D-печати для мастеров и небольших студий. Результаты расчётов — ориентир, а не оферта.</p>
+      <p class="muted">© 2026 · Владелец сайта: самозанятый Марценко С. С. · Данные-заполнители замените на свои.</p>
+    </div>
+    <div>
+      <p><a href="mailto:calc3d.74@mail.ru">calc3d.74@mail.ru</a> · <a href="https://t.me/calc3d_74" rel="noopener">Telegram @calc3d_74</a></p>
+      <p class="muted"><a href="#calc">Калькулятор</a> · <a href="#examples">Примеры</a> · <a href="#faq">Вопросы</a> · <a href="#help">Справка</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-hidden="true">
+  <div><span>Цена продажи</span><b id="mb-price">640 ₽</b></div>
+  <a class="btn btn-primary" href="#result">К результату</a>
+</div>
+
+<noscript><p style="padding:16px;text-align:center">Для живого пересчёта нужен JavaScript. Все тексты, примеры и вопросы доступны и без него.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var PL={PLA:1500,PETG:1800,ABS:1700,TPU:3000,Nylon:3500};
+var FEE={own:3,ozon:15,etsy:9,none:0,custom:0};
+var VAT={none:0,usn6:6,nds20:20};
+var DEF={plastic:'PLA',price:1500,weight:45,hours:3.5,markup:100,power:120,tariff:5.5,printer:25000,life:2000,rate:500,post:20,infill:20,supports:true,support:15,defect:5,platform:'own',custom:5,vat:'none'};
+var st=Object.assign({},DEF);
+var anchor={w:DEF.weight,inf:DEF.infill};
+var EX=[
+ {n:'Брелок из PLA',d:'12 г, 40 минут, без поддержек. Мелочёвка с наценкой 250%.',i:'M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z',p:{plastic:'PLA',price:1500,weight:12,hours:0.7,markup:250,supports:false,infill:20,defect:3,post:5}},
+ {n:'Корпус для платы',d:'180 г PETG, 9 часов, infill 35%, продажа на Ozon.',i:'M3 7h18v12H3zM3 7l3-4h12l3 4M9 12h6',p:{plastic:'PETG',price:1800,weight:180,hours:9,markup:130,supports:true,support:18,infill:35,defect:8,post:35,platform:'ozon'}},
+ {n:'Прототип детали',d:'150 г Nylon, 8 часов, своя комиссия 7,5%.',i:'M12 3a9 9 0 109 9h-9zM12 3a9 9 0 019 9h-9z',p:{plastic:'Nylon',price:3500,weight:150,hours:8,markup:120,supports:true,support:15,infill:50,defect:10,post:30,platform:'custom',custom:7.5}},
+ {n:'Подставка под телефон',d:'40 г PETG, 2 часа, без поддержек, наценка 150%.',i:'M7 3h10v18H7zM10 18h4',p:{plastic:'PETG',price:1800,weight:40,hours:2.1,markup:150,supports:false,infill:30,defect:4,post:10}}
+];
+var BD=[{k:'material',l:'Пластик',c:'#8CF0C4'},{k:'energy',l:'Электричество',c:'#FFC65C'},{k:'amort',l:'Износ принтера',c:'#9DB4FF'},{k:'work',l:'Ваша работа',c:'#7CE0FF'},{k:'defect',l:'Резерв на брак',c:'#FF9DB8'}];
+
+function num(v){return isFinite(v)?v:0;}
+function clamp(v,a,b){return Math.min(Math.max(v,a),b);}
+function rub(v){v=num(v);return (Math.abs(v)<100? v.toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2}) : Math.round(v).toLocaleString('ru-RU'))+' ₽';}
+function hrs(h){h=num(h);var a=Math.floor(h),m=Math.round((h-a)*60);return a===0? m+' мин' : a+' ч '+String(m).padStart(2,'0')+' мин';}
+
+function calc(i){
+  var extra=i.supports?clamp(num(i.support),10,25):0;
+  var grams=num(i.weight)*(1+extra/100);
+  var material=grams/1000*num(i.price);
+  var t=clamp(num(i.hours),0,10000);
+  var energy=t*(num(i.power)/1000)*num(i.tariff);
+  var life=num(i.life);
+  var amort=life>0?(num(i.printer)/life)*t:0;
+  var work=(num(i.post)/60)*num(i.rate);
+  var base=material+energy+amort+work;
+  var defect=base*clamp(num(i.defect),0,100)/100;
+  var total=base+defect;
+  var before=total*(1+num(i.markup)/100);
+  var fp=i.platform==='custom'?clamp(num(i.custom),0,90):(FEE[i.platform]||0);
+  var fee=before*fp/(100-fp);
+  var wo=before+fee, vp=VAT[i.vat]||0, vat=wo*vp/100, sale=wo+vat;
+  var profit=sale-vat-fee-total;
+  return {t:t,grams:grams,material:material,energy:energy,amort:amort,work:work,defect:defect,total:total,before:before,fp:fp,fee:fee,vp:vp,vat:vat,sale:sale,profit:profit,margin:sale>0?profit/sale*100:0,hour:t>0?total/t:0};
+}
+
+var els={plastic:$('f-plastic'),price:$('f-price'),weight:$('f-weight'),hours:$('f-hours'),markup:$('f-markup'),power:$('f-power'),tariff:$('f-tariff'),printer:$('f-printer'),life:$('f-life'),rate:$('f-rate'),post:$('f-post'),infill:$('f-infill'),defect:$('f-defect'),supports:$('f-supports'),support:$('f-support'),platform:$('f-platform'),custom:$('f-custom')};
+var outs={markup:$('out-markup'),infill:$('out-infill'),defect:$('out-defect'),support:$('out-support')};
+
+function readState(){
+  st.plastic=els.plastic.value;
+  st.price=parseFloat(els.price.value);st.weight=parseFloat(els.weight.value);
+  st.hours=parseFloat(els.hours.value);st.markup=parseFloat(els.markup.value);
+  st.power=parseFloat(els.power.value);st.tariff=parseFloat(els.tariff.value);
+  st.printer=parseFloat(els.printer.value);st.life=parseFloat(els.life.value);
+  st.rate=parseFloat(els.rate.value);st.post=parseFloat(els.post.value);
+  st.infill=parseFloat(els.infill.value);st.defect=parseFloat(els.defect.value);
+  st.supports=els.supports.checked;st.support=parseFloat(els.support.value);
+  st.platform=els.platform.value;st.custom=parseFloat(els.custom.value);
+  var v=document.querySelector('input[name="vat"]:checked');st.vat=v?v.value:'none';
+}
+function writeState(){
+  els.plastic.value=st.plastic;els.price.value=st.price;els.weight.value=st.weight;
+  els.hours.value=st.hours;els.markup.value=st.markup;els.power.value=st.power;
+  els.tariff.value=st.tariff;els.printer.value=st.printer;els.life.value=st.life;
+  els.rate.value=st.rate;els.post.value=st.post;els.infill.value=st.infill;
+  els.defect.value=st.defect;els.supports.checked=!!st.supports;els.support.value=st.support;
+  els.platform.value=st.platform;els.custom.value=st.custom;
+  var r=document.querySelector('input[name="vat"][value="'+st.vat+'"]');if(r)r.checked=true;
+  syncUI();
+}
+function syncUI(){
+  outs.markup.textContent=st.markup+'%';outs.infill.textContent=st.infill+'%';
+  outs.defect.textContent=st.defect+'%';outs.support.textContent=st.support+'%';
+  [['markup',0,300],['infill',0,100],['defect',0,20],['support',10,25]].forEach(function(a){
+    var el=els[a[0]],p=(el.value-a[1])/(a[2]-a[1])*100;el.style.setProperty('--fill',p+'%');
+  });
+  $('wrap-support').style.opacity=st.supports?1:.45;
+  $('wrap-custom').hidden=st.platform!=='custom';
+}
+
+var RULE={price:[0,1000000,'Цену килограмма'],weight:[0.1,100000,'Массу детали'],hours:[0,2000,'Время печати']};
+function validate(){
+  Object.keys(RULE).forEach(function(k){
+    var r=RULE[k],v=parseFloat(els[k].value),e=$('e-'+k),bad=!isFinite(v)||v<r[0]||v>r[1];
+    if(e){e.hidden=!bad;e.textContent=bad?'Введите число от '+r[0]+' до '+r[1].toLocaleString('ru-RU'):'';}
+    els[k].setAttribute('aria-invalid',bad?'true':'false');
+  });
+}
+
+function render(){
+  readState();validate();
+  var r=calc(st);
+  $('r-sale').innerHTML=rub(r.sale)+'<small>рекомендованная цена за деталь</small>';
+  $('r-cost').textContent=rub(r.total);
+  $('r-profit').textContent=rub(r.profit);
+  $('c-profit').className='r-cell '+(r.profit>=0?'good':'bad');
+  $('r-margin').textContent=Math.round(r.margin)+'%';
+  $('r-hour').textContent=rub(r.hour)+'/ч';
+  $('mb-price').textContent=rub(r.sale);
+  var bd=$('bd');bd.innerHTML='';
+  BD.forEach(function(b){
+    var v=r[b.k],sh=r.total>0?v/r.total*100:0;
+    var li=document.createElement('li');li.className='bd-li';
+    li.innerHTML='<div class="bd-top"><span>'+b.l+'</span><b>'+rub(v)+' · '+Math.round(sh)+'%</b></div><div class="bd-bar"><i style="--c:'+b.c+';width:'+clamp(sh,0,100)+'%"></i></div>';
+    bd.appendChild(li);
+  });
+  var L='<div><span>Себестоимость</span><b>'+rub(r.total)+'</b></div>'+
+    '<div><span>Наценка '+st.markup+'%</span><b>+ '+rub(r.before-r.total)+'</b></div>';
+  if(r.fp>0)L+='<div><span>Комиссия '+r.fp+'%</span><b>+ '+rub(r.fee)+'</b></div>';
+  if(r.vp>0)L+='<div><span>Налог '+r.vp+'%</span><b>+ '+rub(r.vat)+'</b></div>';
+  L+='<div class="tot"><span>Итоговая цена</span><b>'+rub(r.sale)+'</b></div>';
+  $('ladder').innerHTML=L;
+  $('mbar').classList.add('show');
+  window.__last=r;
+}
+
+/* Примеры */
+var grid=$('ex-grid');
+EX.forEach(function(e,i){
+  var b=document.createElement('button');b.type='button';b.className='ex';
+  b.innerHTML='<span class="ex-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+e.i+'"/></svg></span><h3>'+e.n+'</h3><p>'+e.d+'</p><span class="go">Подставить в калькулятор <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>';
+  b.addEventListener('click',function(){
+    st=Object.assign({},DEF,e.p);st.price=PL[st.plastic];
+    anchor={w:st.weight,inf:st.infill};
+    writeState();render();
+    $('r-note').textContent='Подставлен пример «'+e.n+'» — поправьте массу и время под свою деталь.';
+    $('calc').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  grid.appendChild(b);
+});
+
+/* События формы */
+$('form').addEventListener('input',function(ev){
+  if(ev.target===els.weight){var w=parseFloat(ev.target.value);if(isFinite(w)&&w>0)anchor={w:w,inf:st.infill};}
+  if(ev.target===els.infill){
+    var inf=parseFloat(ev.target.value);
+    if(anchor.inf>0&&isFinite(anchor.w)){
+      var nw=Math.round(anchor.w*(0.5+0.5*(inf/anchor.inf))*10)/10;
+      els.weight.value=nw;anchor={w:nw,inf:inf};
+    }
+  }
+  render();
+});
+$('form').addEventListener('change',render);
+els.plastic.addEventListener('change',function(){st.price=PL[this.value];els.price.value=st.price;render();});
+$('adv').addEventListener('toggle',function(){this.querySelector('summary').setAttribute('aria-expanded',this.open?'true':'false');});
+
+/* Параметры в URL */
+var KEY={plastic:'pl',price:'pp',weight:'w',hours:'h',markup:'mk',power:'pw',tariff:'ep',printer:'pc',life:'lf',rate:'hr',post:'po',infill:'inf',supports:'sup',support:'se',defect:'df',platform:'pf',custom:'cf',vat:'vat'};
+(function fromURL(){
+  var q=new URLSearchParams(location.search);if(!q.has('w')&&!q.has('pl'))return;
+  Object.keys(KEY).forEach(function(k){
+    var v=q.get(KEY[k]);if(v===null)return;
+    if(k==='plastic'){if(PL[v])st.plastic=v;}
+    else if(k==='supports'){st.supports=v==='1';}
+    else if(k==='vat'){if(VAT.hasOwnProperty(v))st.vat=v;}
+    else if(k==='platform'){if(FEE.hasOwnProperty(v))st.platform=v;}
+    else{var n=parseFloat(v);if(isFinite(n))st[k]=n;}
+  });
+  if(!q.has('pp'))st.price=PL[st.plastic];
+  anchor={w:st.weight,inf:st.infill};
+})();
+
+function shareURL(){
+  var q=new URLSearchParams();
+  Object.keys(KEY).forEach(function(k){
+    var d=DEF[k],v=st[k];
+    if(k==='supports')v=v?'1':'0';
+    if(String(v)!==String(d))q.set(KEY[k],v);
+  });
+  var s=q.toString();
+  return location.origin+location.pathname+(s?'?'+s:'');
+}
+$('b-link').addEventListener('click',function(){
+  var url=shareURL(),b=this;
+  function ok(){b.textContent='Ссылка скопирована';setTimeout(function(){b.textContent='Скопировать ссылку на расчёт';},2200);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(ok,function(){fallback();});}
+  else fallback();
+  function fallback(){var t=document.createElement('textarea');t.value=url;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(e){}t.remove();}
+});
+
+/* Экспорт */
+function summaryText(){
+  var r=window.__last||calc(st);
+  return ['РАСЧЁТ СТОИМОСТИ 3D-ПЕЧАТИ','Дата: '+new Date().toLocaleString('ru-RU'),'',
+  'Параметры: '+st.plastic+', '+st.weight+' г, '+hrs(st.hours)+', infill '+st.infill+'%,'+(st.supports?' поддержки +'+st.support+'%,':' без поддержек,')+' брак '+st.defect+'%',
+  'Тариф: '+st.tariff+' ₽/кВт·ч, принтер '+st.printer+' ₽ / '+st.life+' ч, работа '+st.rate+' ₽/ч, постобработка '+st.post+' мин',
+  'Наценка '+st.markup+'%, комиссия '+r.fp+'%, налог '+r.vp+'%','',
+  'Себестоимость: '+rub(r.total)+' (пластик '+rub(r.material)+', свет '+rub(r.energy)+', износ '+rub(r.amort)+', работа '+rub(r.work)+', брак '+rub(r.defect)+')',
+  'Рекомендованная цена: '+rub(r.sale),'Прибыль с детали: '+rub(r.profit)+' ('+Math.round(r.margin)+'%)','Стоимость часа печати: '+rub(r.hour)+'/ч','',
+  'Ссылка на расчёт: '+shareURL(),'Расчёт справочный и не является офертой.'].join('\n');
+}
+$('b-txt').addEventListener('click',function(){
+  var blob=new Blob(['\ufeff'+summaryText()],{type:'text/plain;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='raschet-3d-pechati-'+new Date().toISOString().slice(0,10)+'.txt';
+  document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+  $('r-note').textContent='Файл с расчётом сохранён.';
+});
+function fillPrint(){$('print-block').innerHTML='<pre style="white-space:pre-wrap;font:12px/1.5 monospace">'+summaryText().replace(/[<>&]/g,function(c){return{'<':'&lt;','>':'&gt;','&':'&amp;'}[c];})+'</pre>';}
+window.addEventListener('beforeprint',fillPrint);
+$('b-print').addEventListener('click',function(){fillPrint();window.print();});
+
+writeState();render();
+$('mbar').classList.remove('show');
+})();
+</script>
+</body>
+</html>
